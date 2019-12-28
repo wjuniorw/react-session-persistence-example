@@ -76,7 +76,7 @@ export function* signup({ params }) {
         response: { data },
       } = err
       // console.tronlog('error signup response', data)
-      if (data.length && !data.includes('<!DOCTYPE')) {
+      if (data.length) {
         const messages = data.map(it => `${it.msg}. `).join('\n')
         yield Alert.alert('Campos inválidos', messages)
       } else {
