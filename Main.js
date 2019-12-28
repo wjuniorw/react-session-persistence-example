@@ -19,7 +19,7 @@ function Main({ loadUser, userLogin, logout, user }) {
       <div >
         {<Hello name={user.name} />}
         <p>
-          Start editing to see some magic happen :)
+          Login and refresh page to see magic happen :)
         </p>
         <input type='button' style={{height: '30px'}} value="login" onClick={()=> userLogin()} />
         <input type='button' style={{height: '30px'}} value="logout" onClick={()=> logout()} />
