@@ -2,7 +2,8 @@ import { call, put, select, take } from 'redux-saga/effects';
 
 import { login as tryLogin, signup as register } from './apiCalls';
 
-import { Types, Creators } from '../ducks/user';
+import { Types, Creators as User } from '../ducks/user';
+import { Creators as Session } from '../ducks/session';
 
 export function* login({ data }) {
   try {
@@ -12,8 +13,8 @@ export function* login({ data }) {
     yield localStorage.setItem('MyApp@User', JSON.stringify(user));
     yield localStorage.setItem('MyApp@token', token);
     yield localStorage.setItem('MyApp@refreshToken', refreshToken);
-    yield put(Creators.loginSucess(res));
-    yield put({ type: 'LOG_IN' });
+    yield put(User.loginSucess(res));
+    yield put(Session.logIn());
   } catch (err) {
     console.log('catch message...', err.message);
     if (!err.response) alert('Erro de conexão');
@@ -33,7 +34,7 @@ export function* loadUser() {
     let data = yield JSON.parse(user);
     console.log('user on localStorage...', data);
     if (!!data) {
-      yield put(Creators.loginSucess(data));
+      yield put(User.loginSucess(data));
       yield put({ type: 'LOG_IN' });
     }
   } catch (err) {
