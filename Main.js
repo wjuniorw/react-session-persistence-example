@@ -8,9 +8,10 @@ import { Creators as sessionActions } from './store/ducks/session';
 
 const Actions = { ...userActions, ...sessionActions };
 
-function Main({ loadUser, userLogin, logout }) {
+function Main({ userLogin, logout }) {
   const dispatch = useDispatch();
 
+  const [userName, setUserName] = useState('');
   const { name } = useSelector(state => state.user);
 
   console.log('user prop...', user);
@@ -23,25 +24,26 @@ function Main({ loadUser, userLogin, logout }) {
       {<Hello name={name} />}
       <p>Login and refresh page to see magic happen :)</p>
       <input
+        type="text"
+        style={{ height: '30px' }}
+        value={userName}
+        placeholder="Type user name"
+        onChange={({ target }) => setUserName(target.value)}
+      />
+      <input
         type="button"
         style={{ height: '30px' }}
         value="login"
-        onClick={() => userLogin()}
+        onClick={() => dispatch(Actions.userLogin())}
       />
       <input
         type="button"
         style={{ height: '30px' }}
         value="logout"
-        onClick={() => logout()}
+        onClick={() => dispatch(Actions.logout())}
       />
     </div>
   );
 }
 
-export default connect(
-  state => ({
-    user: state.user,
-    session: state.session
-  }),
-  Actions
-)(Main);
+export default Main;
