@@ -12,7 +12,7 @@ export function* login({ data }) {
     yield localStorage.setItem('MyApp@User', JSON.stringify(user));
     yield localStorage.setItem('MyApp@token', token);
     yield localStorage.setItem('MyApp@refreshToken', refreshToken);
-    yield put({ type: Types.LOGIN_SUCESS, data: res });
+    yield put(Creators.loginSucess(res));
     yield put({ type: 'LOG_IN' });
   } catch (err) {
     console.log('catch message...', err.message);
