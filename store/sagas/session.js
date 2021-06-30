@@ -2,7 +2,7 @@ import { call, put, select, take } from 'redux-saga/effects';
 
 import { login as tryLogin, signup as register } from './apiCalls';
 
-import { Types, Creators as User } from '../ducks/user';
+import { Creators as User } from '../ducks/user';
 import { Creators as Session } from '../ducks/session';
 
 export function* login({ data }) {
