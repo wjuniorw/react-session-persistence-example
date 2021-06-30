@@ -3,7 +3,7 @@ import { call, put, select, take } from 'redux-saga/effects';
 import { login as tryLogin, signup as register } from './apiCalls';
 
 import { Creators as User } from '../ducks/user';
-import { Creators as Session } from '../ducks/session';
+import { Types, Creators as Session } from '../ducks/session';
 
 export function* login({ data }) {
   try {
@@ -28,7 +28,7 @@ export function* login({ data }) {
 }
 
 export function* loadUser() {
-  yield take('LOAD_USER');
+  yield take(Types.LOAD_USER);
   try {
     const user = yield localStorage.getItem('MyApp@User');
     let data = yield JSON.parse(user);
